@@ -1,0 +1,30 @@
+<script>
+/*
+ *考察候选人对基本算法逻辑的掌握情况以及如何寻找最优解的意识
+ * @file   The count
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+
+var prime = function(total){
+    var i,j;
+    var arr = [];
+
+  for(i = 1; i < total; i++){
+
+    for(j=2; j < i; j++){
+      if(i%j === 0) {
+         break;
+      }
+    }
+
+    if(i <= j && i !=1){
+      arr.push(i);
+    }
+
+  }
+  return arr;
+};
+console.log(prime(100));
+
+</script>

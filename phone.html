@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>isphone</title>
+</head>
+<script type="text/javascript">
+/*
+ *考察候选人正则表达式的书写技巧和掌握程度
+ * @file   The count
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+    function IsMobile(tel) {
+        var reg = /^\s*|\s*$/g;
+            tel = tel.replace(reg, "");
+        var dx = /^1[578][01379]\d{8}$/g;//验证电信手机号码格式
+        var lt = /^1[34578][01256]\d{8}$/g;//验证电信手机号码格式
+        var yd = /^(134[012345678]\d{7}|1[34578][012356789]\d{8})$/g;//验证电信手机号码格式
+        if (dx.test(tel)) {
+            return "电信";
+        } else if (lt.test(tel)) {
+            return "联通";
+        } else if (yd.test(tel)) {
+            return "移动";
+        }else{
+          return 0;
+        }
+    }
+</script>
+
+<body>
+验证电信手机号码：<input type="text" id="txtd" value="17012321231" /><span id="spd" style="color:Red;"></span>
+<br />
+验证联通手机号码：<input type="text" id="txtl" value="13012313221" /><span id="spl" style="color:Red;"></span>
+<br />
+验证移动手机号码：<input type="text" id="txty" value="13913132231" /><span id="spy" style="color:Red;"></span>
+<br />
+<input type="button" id="btnVal" value="验证"/>
+<script>
+    document.getElementById("btnVal").onclick = function () {
+        document.getElementById("spd").innerHTML = IsMobile(document.getElementById("txtd").value) ? "验证通过:"+IsMobile(document.getElementById("txtd").value)+"" : "验证不通过";
+        document.getElementById("spl").innerHTML = IsMobile(document.getElementById("txtl").value) ? "验证通过:"+IsMobile(document.getElementById("txtl").value)+"" : "验证不通过";
+        document.getElementById("spy").innerHTML = IsMobile(document.getElementById("txty").value) ? "验证通过:"+IsMobile(document.getElementById("txty").value)+"" : "验证不通过";
+    }
+</script>
+
+</body>
+</html>

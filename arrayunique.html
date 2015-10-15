@@ -1,0 +1,93 @@
+<script>
+/*
+ *考察候选人对数组操作与内存优化方面的知识
+ * @file   The unique of array
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+
+
+ //第一种方法：思路：把数组元素逐个搬运到另一个数组，搬运的过程中检查这个元素是否有重复，如果有就直接丢掉
+function unique1(arr) {
+    var result = [];
+    var isRepeated;
+     for (var i = 0; i < arr.length; i++) {
+       //alert(arr.length)
+         isRepeated = false;
+         for (var j = 0; j < result.length; j++) {
+             if (arr[i] == result[j]) {
+                 isRepeated = true;
+                 continue;
+             }
+         }
+         if (!isRepeated) {
+             result.push(arr[i]);
+         }
+     }
+     return result;
+ }
+ var data=[0,1,2,3,4,5,5,6,2,1,7];
+      //alert(unique1(data))
+
+
+//第二种方法：思路：利用prototype的继承机制，通过this自循环(即：data当前数组)，然后跟原数组(this[0])进行比较
+Array.prototype.unique2 = function(){
+ var result = [this[0]];
+ console.log(result)
+ for(var i = 1; i < this.length; i++){//通过this自循环data
+  var repeat = false;
+  for(var j = 0; j < result.length; j++){
+   if(this[i] == result[j]){
+    repeat = true;
+    break;
+   }
+  }
+  if(!repeat){
+   result.push(this[i]);
+  }
+ }
+ return result;
+}
+var data = [1, 'a', 'a', 'b', 'd', 'e', 'e', 1, 0]
+alert(data.unique2());
+
+
+//第三种方法：
+Array.prototype.unique3 = function () {
+  var n = []; //一个新的临时数组
+  for (var i = 0; i < this.length; i++) //遍历当前数组
+  {
+    //如果当前数组的第i已经保存进了临时数组，那么跳过，
+    //否则把当前项push到临时数组里面
+    if (n.indexOf(this[i]) == -1) n.push(this[i]);
+  }
+  return n;
+}
+
+//第四种方法:
+Array.prototype.unique4 = function(){
+	var n = [this[0]]; //结果数组
+	for(var i = 1; i < this.length; i++) //从第二项开始遍历
+	{
+		//如果当前数组的第i项在当前数组中第一次出现的位置不是i，
+		//那么表示第i项是重复的，忽略掉。否则存入结果数组
+		if (this.indexOf(this[i]) == i) n.push(this[i]);
+	}
+	return n;
+}
+
+//第五种方法(高效低碳):
+Array.prototype.unique5 = function()
+{
+	this.sort();
+	var re=[this[0]];
+	for(var i = 1; i < this.length; i++)
+	{
+		if( this[i] !== re[re.length-1])
+		{
+			re.push(this[i]);
+		}
+	}
+	return re;
+}
+</script>

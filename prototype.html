@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="btn1">button1</div></br></br>
+  <div id="btn2">button2</div></br></br>
+  <div id="btn3">button3</div>
+</body>
+</html>
+
+
+<script>
+/*
+ *考察候选人对基于oop模式prototype的原型继承和调用的掌握情况
+ * @file   The peototype
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+
+
+function MAN() {};
+         MAN.prototype = {
+            value: "linkxiao",
+            wakeUp: function(event) {
+                console.log(this.value);//请分别写出value的值
+            }
+         };
+
+var man=new MAN;//实例化
+var button = document.getElementById('btn1');
+    button.addEventListener(//第一种场景下被触发
+        "click",
+        man.wakeUp,
+        false
+    );
+
+
+var button = document.getElementById('btn2');
+    button.addEventListener(//第二种场景下被触发
+        "click",
+        function() {
+            MAN.prototype.wakeUp.apply(man, arguments);
+        },
+        false
+    );
+
+var button = document.getElementById('btn3');
+    button.value="['eileen']";
+    button.addEventListener(//第三种场景下被触发
+        "click",
+        function() {
+            var value=this.value;
+            MAN.prototype.wakeUp.apply(this, arguments);
+        },
+        false
+    );
+
+
+</script>

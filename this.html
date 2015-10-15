@@ -1,0 +1,29 @@
+<script>
+/*
+ *this是一个指针，随着函数调用的变化其上下文也随之变化,考察候选人对this指针的掌握情况，从而深层次挖掘候选人对代码优化的认知
+ * @file   The peototype
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+
+ //this是一个指针，随着函数调用的变化其上下文也随之变化
+var name = 'Linkxiao';
+var obj = {
+    name: 'John',
+    prop: {
+      name: 'Eileen',
+      setName: function() {
+         return this.name;
+      }
+   }
+};
+
+console.log(obj.prop.setName());//请输出结果:Eileen
+
+var getName = obj.prop.setName;
+console.log(getName());//请输出结果:linkxiao
+
+console.log(getName.call(obj))//请输出结果:John
+
+console.log(getName.call(obj.prop))//请输出结果:Eileen
+</script>

@@ -1,0 +1,30 @@
+<script>
+/*
+ *考察候选人对变量作用区域和闭包的掌握情况
+ * @file   The bibao
+ * @author linkxiao
+ * @date   2015/10/14
+ */
+
+//考察候选人对变量作用区域的掌握情况
+(function() {
+   var a = b = 5;
+})();
+console.log(a);//undefiend
+console.log(b);//5
+
+//考察候选人对闭包的掌握情况
+function LinkXiao(){
+　　　　var n=999;
+　　　　this.Add=function(){//相当于全局变量
+           n+=1
+       }
+　　　　return function(){
+　　　　　　return n;
+　　　　}
+　　}
+　　var result=LinkXiao();
+    　　console.log(result()); //第一次执行结果是999
+    　　console.log(Add());    //执行一次加1
+    　　console.log(result()); //第二次执行结果是1000
+</script>
