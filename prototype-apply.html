@@ -21,33 +21,48 @@
  */
 
 
-function MAN() {};
-         MAN.prototype = {
-            value: "linkxiao",
-            wakeUp: function() {
-                console.log(this.value);//请分别写出value的值
-            }
-         };
+function MAN(params) {
+    this.value=params.value;
+    this.title=params.title;
+    //alert(this.value)
+};
+MAN.prototype = {
+  init:function(){
+    this.wakeUp();
+  },
+  wakeUp: function() {
+    console.log(this.value);//请分别写出value的值
+  },
+  setProp:function(){
+      this.value="prop";
+      return this.value;
+  }
+};
 
-var man=new MAN;//实例化
+var man=new MAN({
+    value:"abc",
+    title:"linkxiao"
+});//实例化
 var button = document.getElementById('btn1');
     button.addEventListener(//第一种场景下被触发
         "click",function(){
           man.wakeUp()
-        }
-        ,
+        },
         false
     );
 
 
 var button = document.getElementById('btn2');
+    button.value="xxx";
     button.addEventListener(//第二种场景下被触发
         "click",
         function() {
-            MAN.prototype.wakeUp.apply(man, arguments);
+            MAN.prototype.wakeUp.call(man, man.setProp());
+            man.wakeUp.call(this,this.value);
         },
         false
     );
+
 
 var button = document.getElementById('btn3');
     button.value="['eileen']";
@@ -55,7 +70,7 @@ var button = document.getElementById('btn3');
         "click",
         function() {
             var value=this.value;
-            MAN.prototype.wakeUp.apply(this,arguments);
+            man.wakeUp.call(this);
         },
         false
     );

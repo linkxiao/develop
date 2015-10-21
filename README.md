@@ -1,4 +1,4 @@
-Javascript部分面试题
+Javascript高级部分面试题
 
 1．	请写出程序在以下三种场景下被触发的Value值:
 function MAN() {};
@@ -85,7 +85,7 @@ function LinkXiao(){
 　　var result=LinkXiao();
     　  console.log(result());
     　　console.log(Add());  
-    　　	 console.log(result());
+    　　console.log(result());
 
 5．	高效实现以下数组除重: var data=[0,1,2,3,4,5,5,6,2,1,7];
 
